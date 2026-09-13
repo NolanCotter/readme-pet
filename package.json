@@ -1,0 +1,32 @@
+{
+  "name": "readme-pet",
+  "version": "1.0.0",
+  "description": "A Tamagotchi that lives in your GitHub README — evolves based on your commits",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "readme-pet": "./src/cli.js"
+  },
+  "files": ["src/", "templates/", "assets/", "README.md", "LICENSE"],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "demo": "vite demo",
+    "test": "vitest"
+  },
+  "keywords": ["github", "readme", "tamagotchi", "pet", "profile"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nolan/readme-pet.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vitest": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

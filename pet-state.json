@@ -1,0 +1,16 @@
+{
+  "name": "Mochi",
+  "species": "octocat",
+  "level": 1,
+  "xp": 0,
+  "stage": "egg",
+  "hunger": 50,
+  "happiness": 50,
+  "health": 100,
+  "streak": 0,
+  "totalCommits": 0,
+  "lastUpdate": "2026-09-13T00:00:00Z",
+  "lastFed": "2026-09-13T00:00:00Z",
+  "birthDate": "2026-09-13T00:00:00Z",
+  "evolutionHistory": ["egg"]
+}

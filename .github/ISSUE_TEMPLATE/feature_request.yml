@@ -1,0 +1,66 @@
+name: ✨ Feature request
+description: Suggest a new mood, stage, or trick for the pet
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for dreaming up something new for readme-pet! The pet is
+        intentionally small, so the most useful requests are usually tiny
+        too — a mood, a stat, or a new stage.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What should the pet do?
+      description: Describe the new behavior in a sentence or two, plus what it should look like.
+      placeholder: |
+        Example: a "smug" mood when the streak hits 30+ — head tilted, tiny
+        sunglasses, and the extra happiness shown on the bar.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why do you want it?
+      description: What does it add — motivation, humor, or a better signal for how you commit?
+      placeholder: |
+        Example: I stop committing around lunch, so a "sleepy" mood at midday
+        would guilt me back to work.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Which part does it touch the most?
+      multiple: true
+      options:
+        - Engine (src/engine.js) — moods, stages, stats, evolution
+        - Renderer (src/renderer.js) — SVG art and animation
+        - README generator (src/readme.js) — profile and header text
+        - Workflow (.github/workflows/update-pet.yml)
+        - Docs, templates, or other
+
+  - type: markdown
+    attributes:
+      value: |
+        A quick heads-up: the simpler the change, the faster it ships. Art
+        sketches or mock SVG output are always welcome in the field below.
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Sketches, mock previews, or links to issues that inspired this.
+      placeholder: Optional.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before you submit
+      options:
+        - label: I searched existing issues first
+          required: true
+        - label: I'm happy to keep the diff small and add tests
+          required: true

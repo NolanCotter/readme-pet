@@ -1,0 +1,53 @@
+# Update Readme Pet
+#
+# Runs the README Tamagotchi script to keep your pet alive and update your
+# profile readme with the current pet state.
+#
+# It runs every 6 hours by default. To change the cadence, edit the `cron`
+# value below — for example `'0 */12 * * *'` for every 12 hours or
+# `'0 0 * * *'` for once a day. (Cron is in UTC.)
+# You can also trigger it manually at any time via the "Run workflow"
+# button on the Actions tab.
+
+name: Update Readme Pet
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Bump pet
+        run: GITHUB_USERNAME=${{ github.repository_owner }} node src/cli.js --github ${{ github.repository_owner }} --token ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "Readme Pet Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/pet.svg assets/profile.md pet-state.json
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "🐾 pet update"
+            git push
+          fi
