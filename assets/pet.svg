@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200" role="img" aria-label="Mochi level 1 egg egg">
+<style>
+  .bob{animation:bob 2.2s ease-in-out infinite;transform-origin:200px 90px}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .blink{animation:blink 4.2s infinite;transform-origin:200px 78px}
+  @keyframes blink{0%,90%,100%{transform:scaleY(1)}92%,94%{transform:scaleY(0.08)}}
+  @keyframes flame{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.12)}}
+  @media (prefers-reduced-motion:reduce){.bob,.blink{animation:none}}
+</style>
+<rect width="400" height="200" rx="12" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="1.2"/>
+
+<!-- shadow -->
+<ellipse cx="200" cy="130" rx="44" ry="6.5" fill="#000" opacity="0.08"/>
+<g class="bob">
+  
+      <ellipse cx="200" cy="88" rx="30" ry="38" fill="#F5E6C8" stroke="#E2CFA8" stroke-width="2"/>
+      <ellipse cx="190" cy="68" rx="7" ry="9" fill="white" opacity="0.55"/>
+      <path d="M184 98 l6 8 l7 -5 l6 6 l7 -4" fill="none" stroke="#E2CFA8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="200" cy="121" rx="2.2" ry="1.4" fill="#E2CFA8" opacity="0.25"/>
+  <g opacity="0.95"><circle cx="176" cy="92" r="6.5" fill="#FF8FA3" opacity="0.42"/><circle cx="224" cy="92" r="6.5" fill="#FF8FA3" opacity="0.42"/></g>
+  <g class="blink"><g class="eyes"><path d="M178 80 l6 -7 l6 7" stroke="#1F2328" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M206 80 l6 -7 l6 7" stroke="#1F2328" stroke-width="2.2" stroke-linecap="round" fill="none"/></g></g>
+  <path d="M192 94 q8 8 16 0" stroke="#1F2328" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+</g>
+<text x="200" y="148" text-anchor="middle" font-size="13" font-weight="800" fill="#1F2328" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">Mochi — Lv.1</text>
+<text x="200" y="161" text-anchor="middle" font-size="7.5" font-weight="600" letter-spacing="0.7" fill="#656D76" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">EGG • EGG</text>
+
+  <g>
+    <text x="55" y="168" font-size="6.5" font-weight="700" letter-spacing="0.6" fill="#656D76" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">HUNGER</text>
+    <rect x="55" y="172" width="86" height="8" rx="4" fill="#EAEFF2" stroke="#D0D7DE" stroke-width="1"/>
+    <rect x="56" y="173" width="55" height="6" rx="3" fill="#FF7B72"/>
+  </g>
+
+  <g>
+    <text x="157" y="168" font-size="6.5" font-weight="700" letter-spacing="0.6" fill="#656D76" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">HAPPY</text>
+    <rect x="157" y="172" width="86" height="8" rx="4" fill="#EAEFF2" stroke="#D0D7DE" stroke-width="1"/>
+    <rect x="158" y="173" width="34" height="6" rx="3" fill="#7EE787"/>
+  </g>
+
+  <g>
+    <text x="259" y="168" font-size="6.5" font-weight="700" letter-spacing="0.6" fill="#656D76" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">HEALTH</text>
+    <rect x="259" y="172" width="86" height="8" rx="4" fill="#EAEFF2" stroke="#D0D7DE" stroke-width="1"/>
+    <rect x="260" y="173" width="84" height="6" rx="3" fill="#58A6FF"/>
+  </g>
+</svg>

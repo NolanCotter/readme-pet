@@ -4,13 +4,15 @@
   "level": 1,
   "xp": 0,
   "stage": "egg",
-  "hunger": 50,
-  "happiness": 50,
+  "hunger": 65,
+  "happiness": 40,
   "health": 100,
   "streak": 0,
   "totalCommits": 0,
-  "lastUpdate": "2026-09-13T00:00:00Z",
+  "lastUpdate": "2026-09-13T23:59:58.171Z",
   "lastFed": "2026-09-13T00:00:00Z",
   "birthDate": "2026-09-13T00:00:00Z",
-  "evolutionHistory": ["egg"]
+  "evolutionHistory": [
+    "egg"
+  ]
 }
