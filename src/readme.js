@@ -239,10 +239,30 @@ export async function generateReadme({ username, petName, svg, state }) {
 
 /**
  * Render just the embeddable pet snippet (pet + stats + status bars).
- * Used by the CLI to write assets/profile.md. Alias of buildProfile.
+ * Used by the CLI to write assets/profile.md — uses an absolute raw URL so
+ * it works when pasted into <username>/<username>/README.md.
  * @param {object} opts Same options as buildHeader/buildProfile
  * @returns {string} Markdown snippet
  */
-export function renderProfileSnippet(opts) {
-  return buildProfile(opts);
+export function renderProfileSnippet({ username, petName, svg, state }) {
+  const mood = state.mood ?? 'happy';
+  const emoji = moodEmoji(mood);
+  const stage = state.stage ?? 'baby';
+  const stageEmo = stageEmoji(stage);
+  return [
+    `<!-- readme-pet: ${petName} (Lv.${state.level ?? 1} ${stage}) — auto-updated by GitHub Actions -->`,
+    '',
+    `> ${emoji} **${petName}** — level ${state.level ?? 1} · ${mood} · ${stageEmo} ${stage}`,
+    '',
+    `![${petName} — a readme-pet](${petSvgUrl(username)})`,
+    '',
+    `> 🔥 **${state.streak ?? 0} day streak** · 📝 \`${state.totalCommits ?? 0}\` commits all-time`,
+    '',
+    `> ${[
+      `${bar('🍖', state.hunger ?? 0)} hunger`,
+      `${bar('⚡', state.health ?? 0)} health`,
+      `${bar('💖', state.happiness ?? 0)} happiness`,
+    ].join(' · ')}`,
+    `> *This pet feeds on commits — silence makes it sick.* → [readme-pet](https://github.com/${username}/readme-pet)`,
+  ].join('\n');
 }
