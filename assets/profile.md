@@ -6,5 +6,5 @@
 
 > [streak] 0 day streak · [commits] `0` all-time
 
-> HUNGER ██████████ 100% · HEALTH ███████░░░ 70% · HAPPY ░░░░░░░░░░ 0%
+> HUNGER ██████████ 100% · HEALTH ███████░░░ 65% · HAPPY ░░░░░░░░░░ 0%
 > *This pet feeds on commits — silence makes it sick.* - [readme-pet](https://github.com/NolanCotter/readme-pet)
