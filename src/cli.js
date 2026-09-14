@@ -121,7 +121,9 @@ async function profileSnippet(svg, state) {
   try {
     const readme = await import('./readme.js');
     const fn = readme.renderProfileSnippet ?? readme.default;
-    if (typeof fn === 'function') return await fn(svg, state);
+    if (typeof fn === 'function') {
+      return await fn({ username: process.env.GITHUB_USERNAME || 'your-username', petName: state.name, svg, state });
+    }
   } catch {
     /* readme.js not present yet — inline default below */
   }
