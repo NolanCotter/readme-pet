@@ -48,6 +48,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/pet.svg assets/profile.md pet-state.json
           if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "🐾 pet update"
+            git commit -m "chore: pet update"
             git push
           fi

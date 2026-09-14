@@ -104,4 +104,4 @@ renderer and README-generator coverage live in
   "update stuff".
 
 Questions are better as an issue than a drive-by PR. Otherwise, have fun —
-the pet is hungry for good diffs. 🐾
+the pet is hungry for good diffs.

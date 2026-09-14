@@ -137,7 +137,7 @@ function body(stage) {
           <rect x="152" y="104" width="22" height="18" rx="9"/><rect x="178" y="104" width="22" height="20" rx="9"/><rect x="204" y="104" width="22" height="20" rx="9"/><rect x="230" y="104" width="22" height="18" rx="9"/>
           <circle cx="163" cy="122" r="3" fill="white" opacity="0.5" stroke="none"/><circle cx="189" cy="124" r="3" fill="white" opacity="0.5" stroke="none"/><circle cx="215" cy="124" r="3" fill="white" opacity="0.5" stroke="none"/><circle cx="241" cy="122" r="3" fill="white" opacity="0.5" stroke="none"/>
         </g>
-        <g fill="white" opacity="0.9"><text x="128" y="52" font-size="9">✦</text><text x="262" y="48" font-size="8">✦</text><text x="268" y="68" font-size="6">✦</text></g>
+        <g fill="white" opacity="0.9"><text x="128" y="52" font-size="11">*</text><text x="262" y="48" font-size="9">*</text><text x="268" y="68" font-size="7">*</text></g>
       </g>`;
     case "adult":
     default:

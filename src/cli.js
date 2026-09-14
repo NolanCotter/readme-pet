@@ -17,7 +17,8 @@ const ROOT = dirname(fileURLToPath(import.meta.url)); // .../src
 const STATE_FILE = join(ROOT, '..', 'pet-state.json');
 const ASSETS_DIR = join(ROOT, '..', 'assets');
 
-const MOOD_EMOJI = { happy: '😊', hungry: '😋', sad: '😢', sick: '🤒', sleepy: '😴', excited: '🤩', egg: '🐣' };
+/** Mood lookup — plain text labels (no emoji). */
+const MOOD_LABEL = { happy: 'happy', hungry: 'hungry', sad: 'sad', sick: 'sick', sleepy: 'sleepy', excited: 'excited', egg: 'egg' };
 const FACES = ['(◕‿◕)', '(´･ᴗ･`)', '(◡ ω ◡)', '(・ω・)'];
 
 const C = {
@@ -53,12 +54,12 @@ function bar(label, value, color = 'green') {
 /** One-line encouragement matching the pet's mood. */
 function tip(mood) {
   const tips = {
-    hungry: '🍽️ Run --feed before the growling wakes the neighbours.',
-    sad: '🎾 Run --play — it loves a good chase.',
-    sick: '💊 Run --heal and tuck it in.',
-    sleepy: '💤 Stay active — more commits, fewer zzz.',
-    excited: '✨ It is on fire. Keep committing!',
-    happy: '🌱 Healthy and happy. Keep the streak alive!',
+    hungry: 'Action: run --feed before the growling wakes the neighbours.',
+    sad: 'Action: run --play — it loves a good chase.',
+    sick: 'Action: run --heal and tuck it in.',
+    sleepy: 'Stay active — more commits, fewer zzz.',
+    excited: 'It is on fire. Keep committing!',
+    happy: 'Healthy and happy. Keep the streak alive!',
   };
   return tips[mood] || '';
 }
@@ -73,7 +74,7 @@ function statusBoard(engine) {
   const mood = engine.getMood();
   const hours = s.lastUpdate ? Math.max(0, Math.round((Date.now() - Date.parse(s.lastUpdate)) / 3.6e6)) : null;
   const inner = [
-    `${s.name}  ·  Lv.${s.level}  ·  ${s.stage}  ${MOOD_EMOJI[mood] || '🙂'}`,
+    `${s.name}  ·  Lv.${s.level}  ·  ${s.stage}  ${MOOD_LABEL[mood] || 'happy'}`,
     ` ${bar('Hunger', s.hunger, statColor(s.hunger, false))}`,
     ` ${bar('Happiness', s.happiness, statColor(s.happiness))}`,
     ` ${bar('Health', s.health, statColor(s.health))}`,
@@ -84,7 +85,7 @@ function statusBoard(engine) {
   return ['╭' + '─'.repeat(w) + '╮', ...inner.map(frame), '╰' + '─'.repeat(w) + '╯'].join('\n');
 }
 
-/** 🐾 Short TTY-only animation while the pet "tick"s. */
+/** [pet] Short TTY-only animation while the pet "tick"s. */
 async function animate(engine) {
   if (!process.stdout.isTTY) return;
   for (let i = 0; i < 8; i++) {
@@ -172,7 +173,7 @@ export async function main(argv = process.argv.slice(2)) {
     if (args.cmd === 'feed' || args.cmd === 'play' || args.cmd === 'heal') {
       engine[args.cmd]();
     } else if (args.cmd === 'github') {
-      if (!args.username) return console.error('⚠️  --github needs a username, e.g. --github octocat'), 1;
+      if (!args.username) return console.error('ERROR: --github needs a username, e.g. --github octocat'), 1;
       const stats = await getGitHubStats(args);
       await animate(engine);
       engine.tick({
@@ -181,7 +182,7 @@ export async function main(argv = process.argv.slice(2)) {
         totalCommits: stats.totalCommits,
         hoursSinceLastCommit: stats.hoursSinceLastCommit,
       });
-      synced = `🐙 Synced ${args.username} — ${stats.commitsToday} commits today, ${stats.streak}-day streak.`;
+      synced = `[octo] Synced ${args.username} — ${stats.commitsToday} commits today, ${stats.streak}-day streak.`;
     } else {
       const stats = await getLocalStats();
       await animate(engine);
@@ -206,11 +207,11 @@ export async function main(argv = process.argv.slice(2)) {
         writeFile(join(ASSETS_DIR, 'pet.svg'), svg),
         writeFile(join(ASSETS_DIR, 'profile.md'), await profileSnippet(svg, status)),
       ]);
-      console.log(`💾 Saved assets/pet.svg and assets/profile.md`);
+      console.log(`Saved assets/pet.svg and assets/profile.md`);
     }
     return 0;
   } catch (err) {
-    console.error('🐾 Pet is fine but GitHub API is sleepy...');
+    console.error('[pet] Pet is fine but GitHub API is sleepy...');
     if (err.message) console.error(`   (${err.message})`);
     try {
       console.log(statusBoard(new PetEngine())); // defaults

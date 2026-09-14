@@ -27,8 +27,8 @@ const STAGES = {
   adult: { c: '#57606A', s: '#3D444D' },
   legendary: { c: '#FFD700', s: '#C89B00' },
 };
-/** @type {Record<string, string>} Mood → emoji. */
-const MOODS = { happy: '🙂', hungry: '😋', sad: '😢', sick: '🤒', sleepy: '😴', excited: '🤩' };
+/** @type {Record<string, string>} Mood -> plain-text label. */
+const MOODS = { happy: 'happy', hungry: 'hungry', sad: 'sad', sick: 'sick', sleepy: 'sleepy', excited: 'excited' };
 /** @type {string[]} Name pool for breeding. */
 const NAMES = ['Mochi', 'Pixel', 'Nibbles', 'Waffles', 'Socks', 'Gizmo', 'Miso', 'Biscuit', 'Sprinkle', 'Crumbs', 'Toffee', 'Bubbles'];
 /** @type {Record<string, [number, number]>} Plausible level range per stage. */
@@ -101,7 +101,7 @@ function body(stage) {
     case 'teen':
       return `<path d="M164 54 l8 -12 l8 10 l8 -12 l8 10 l8 -12 l8 10 l8 -12 l8 10" fill="${s}" stroke="${s}" stroke-linejoin="round"/><rect x="154" y="50" width="92" height="68" rx="20" fill="${c}" stroke="${s}" stroke-width="2"/><path d="M162 60 l10 -10 l8 8 Z" fill="${c}" stroke="${s}" stroke-width="1.4" stroke-linejoin="round"/><path d="M228 60 l10 -10 l8 8 Z" fill="${c}" stroke="${s}" stroke-width="1.4" stroke-linejoin="round"/><ellipse cx="176" cy="68" rx="8" ry="10" fill="white" opacity="0.32"/><path d="M172 108 q6 6 12 0 q6 6 12 0 q6 6 12 0 q6 6 12 0" fill="${c}" stroke="${s}" stroke-width="1.6" stroke-linecap="round"/>`;
     case 'legendary':
-      return `<path d="M175 44 l9 -16 l14 11 l14 -11 l9 16 Z" fill="#FFC300" stroke="#C89B00" stroke-width="1.6" stroke-linejoin="round"/><circle cx="200" cy="33" r="4.5" fill="white" stroke="#C89B00" stroke-width="1"/><circle cx="183" cy="38" r="2.2" fill="white" stroke="#C89B00" stroke-width="1"/><circle cx="217" cy="38" r="2.2" fill="white" stroke="#C89B00" stroke-width="1"/><rect x="145" y="44" width="110" height="74" rx="24" fill="${c}" stroke="${s}" stroke-width="2"/><path d="M154 58 l10 -12 l8 10 Z" fill="${c}" stroke="${s}" stroke-width="1.4" stroke-linejoin="round"/><path d="M236 58 l10 -12 l8 10 Z" fill="${c}" stroke="${s}" stroke-width="1.4" stroke-linejoin="round"/><ellipse cx="168" cy="62" rx="9" ry="11" fill="white" opacity="0.35"/><g fill="${c}" stroke="${s}" stroke-width="1.6"><rect x="152" y="104" width="22" height="18" rx="9"/><rect x="178" y="104" width="22" height="20" rx="9"/><rect x="204" y="104" width="22" height="20" rx="9"/><rect x="230" y="104" width="22" height="18" rx="9"/></g><g fill="white" opacity="0.9"><text x="128" y="52" font-size="9">✦</text><text x="262" y="48" font-size="8">✦</text><text x="268" y="68" font-size="6">✦</text></g>`;
+      return `<path d="M175 44 l9 -16 l14 11 l14 -11 l9 16 Z" fill="#FFC300" stroke="#C89B00" stroke-width="1.6" stroke-linejoin="round"/><circle cx="200" cy="33" r="4.5" fill="white" stroke="#C89B00" stroke-width="1"/><circle cx="183" cy="38" r="2.2" fill="white" stroke="#C89B00" stroke-width="1"/><circle cx="217" cy="38" r="2.2" fill="white" stroke="#C89B00" stroke-width="1"/><rect x="145" y="44" width="110" height="74" rx="24" fill="${c}" stroke="${s}" stroke-width="2"/><path d="M154 58 l10 -12 l8 10 Z" fill="${c}" stroke="${s}" stroke-width="1.4" stroke-linejoin="round"/><path d="M236 58 l10 -12 l8 10 Z" fill="${c}" stroke="${s}" stroke-width="1.4" stroke-linejoin="round"/><ellipse cx="168" cy="62" rx="9" ry="11" fill="white" opacity="0.35"/><g fill="${c}" stroke="${s}" stroke-width="1.6"><rect x="152" y="104" width="22" height="18" rx="9"/><rect x="178" y="104" width="22" height="20" rx="9"/><rect x="204" y="104" width="22" height="20" rx="9"/><rect x="230" y="104" width="22" height="18" rx="9"/></g><g fill="white" opacity="0.9"><text x="128" y="52" font-size="11">*</text><text x="262" y="48" font-size="9">*</text><text x="268" y="68" font-size="7">*</text></g>`;
     default: // adult
       return `<path d="M158 56 l12 -14 l10 12 Z" fill="${c}" stroke="${s}" stroke-width="1.6" stroke-linejoin="round"/><path d="M230 56 l12 -14 l10 12 Z" fill="${c}" stroke="${s}" stroke-width="1.6" stroke-linejoin="round"/><rect x="150" y="46" width="100" height="72" rx="22" fill="${c}" stroke="${s}" stroke-width="2"/><ellipse cx="170" cy="64" rx="8" ry="11" fill="white" opacity="0.32"/><g fill="${c}" stroke="${s}" stroke-width="1.6"><rect x="156" y="104" width="20" height="16" rx="8"/><rect x="179" y="104" width="20" height="18" rx="8"/><rect x="202" y="104" width="20" height="18" rx="8"/><rect x="225" y="104" width="20" height="16" rx="8"/></g>`;
   }
@@ -122,7 +122,7 @@ function renderPet(st) {
   const bobDur = mood === 'excited' ? '0.85s' : mood === 'sleepy' ? '3.2s' : mood === 'sick' ? '3.8s' : mood === 'sad' ? '2.8s' : '2.2s';
   const cheeks = `<circle cx="176" cy="92" r="6.5" fill="#FF8FA3" opacity="0.42"/><circle cx="224" cy="92" r="6.5" fill="#FF8FA3" opacity="0.42"/>`;
   const streak = st.streak > 0
-    ? `<g transform="translate(292,14)"><rect width="92" height="22" rx="11" fill="#FFF8C5" stroke="#D4A017" stroke-width="1.2"/><text x="46" y="14.5" text-anchor="middle" font-size="10" font-weight="800" fill="#7D4E00" font-family="${FONT}">🔥 ${st.streak} day streak</text></g>`
+    ? `<g transform="translate(292,14)"><rect width="92" height="22" rx="11" fill="#FFF8C5" stroke="#D4A017" stroke-width="1.2"/><text x="46" y="14.5" text-anchor="middle" font-size="10" font-weight="800" fill="#7D4E00" font-family="${FONT}">[streak ${st.streak}]</text></g>`
     : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200" role="img" aria-label="${esc(st.name)} level ${st.level} ${stage} ${mood}">
 <style>
@@ -155,18 +155,18 @@ function note(msg) {
 function feed() {
   pet.hunger = clamp(pet.hunger - 30);
   pet.happiness = clamp(pet.happiness + 5);
-  note('🍖 fed — hunger -30, happiness +5');
+  note('[feed] fed — hunger -30, happiness +5');
 }
 /** Play: +20 happiness, +10 hunger. @returns {void} */
 function play() {
   pet.happiness = clamp(pet.happiness + 20);
   pet.hunger = clamp(pet.hunger + 10);
-  note('🎾 played — happiness +20, hunger +10');
+  note('[play] played — happiness +20, hunger +10');
 }
 /** Heal: fully restore health. @returns {void} */
 function heal() {
   pet.health = 100;
-  note('💊 healed — health restored to 100');
+  note('[heal] healed — health restored to 100');
 }
 /** Simulate a day of GitHub activity (commits present 60% of the time). @returns {void} */
 function tick() {
@@ -176,13 +176,13 @@ function tick() {
     pet.xp += 10;
     pet.streak += 1;
     pet.totalCommits += 1;
-    note('☀️ day passed — commits! hunger -20, happiness +15, +10 XP');
+    note('[tick] day passed — commits! hunger -20, happiness +15, +10 XP');
   } else {
     pet.hunger = clamp(pet.hunger + 15);
     pet.happiness = clamp(pet.happiness - 10);
     pet.streak = 0;
     if (pet.hunger > 80) pet.health = clamp(pet.health - 5);
-    note(`☀️ day passed — no commits${pet.hunger > 80 ? ', health -5' : ''}`);
+    note(`[tick] day passed — no commits${pet.hunger > 80 ? ', health -5' : ''}`);
   }
   pet.level = Math.floor(pet.xp / 100) + 1; // same rule as PetEngine#addXP
 }
@@ -199,7 +199,7 @@ function breed() {
   pet.health = rnd(40, 100);
   pet.streak = rnd(0, 30);
   pet.totalCommits += rnd(0, 20);
-  note(`🧬 bred ${pet.name} — a ${stage}!`);
+  note(`[bred] bred ${pet.name} — a ${stage}!`);
 }
 
 // — Stats panel + wiring —
@@ -215,7 +215,7 @@ function renderAll() {
     `<span>${esc(pet.name)}</span>` +
     `<span>Lv. <b>${pet.level}</b></span>` +
     `<span>${pet.stage} ${MOODS[mood]}</span>` +
-    `<span>🔥 <b>${pet.streak}</b> streak</span>` +
+    `<span>streak <b>${pet.streak}</b></span>` +
     `<span>${pet.totalCommits} commits</span>`;
   document.getElementById('bars').innerHTML =
     statBar('hunger', pet.hunger, '#FF7B72') +
@@ -229,7 +229,7 @@ function wire(id, fn) {
     renderAll();
   });
 }
-note('🧬 breed a new pet, or feed / play / heal — every action re-renders the SVG');
+note('[demo] breed a new pet, or feed / play / heal — every action re-renders the SVG');
 wire('feed', feed);
 wire('play', play);
 wire('heal', heal);

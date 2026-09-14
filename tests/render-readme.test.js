@@ -111,7 +111,7 @@ describe('generateReadme', () => {
     const lower = header.toLowerCase();
     expect(lower).toContain('mochi');
     expect(lower).toContain('day streak');
-    expect(lower).toContain('commits all-time');
+    expect(lower).toContain('all-time');
     expect(lower).toContain('hunger');
   });
 });
@@ -138,6 +138,6 @@ describe('buildHeader', () => {
   });
 
   it('includes the stage emoji', () => {
-    expect(buildHeader(opts)).toContain('🐣'); // baby
+    expect(buildHeader(opts)).toContain('baby'); // stage label
   });
 });

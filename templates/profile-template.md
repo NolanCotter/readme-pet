@@ -15,7 +15,7 @@
 
 <!-- ===== Intro block ===== -->
 <!-- Your one-line greeting. Edit freely — this is your face to the GitHub world. -->
-### Hi there 👋 I'm {{USERNAME}}
+### Hi there I'm {{USERNAME}}
 
 <!-- ===== Pet block ===== -->
 <!-- The living pet. Leave the src URL exactly as-is: the 6-hourly GitHub
@@ -32,13 +32,13 @@
 <!-- ===== Commit Arbiter section ===== -->
 <!-- Optional but recommended — this is the story that makes the pet fun.
      Edit the bullets freely, just keep the three "rules" readable. -->
-## 🔥 Commit Arbiter
+## Commit Arbiter
 
 Meet **{{PET-NAME}}**, the commit arbiter living in this README. It feeds on pushes and does not forgive silence.
 
-- ✅ **Every commit feeds it** — work keeps it full and the streak alive.
-- ⚠️ **Silence makes it hungry, then sad, then sick** — a rotting streak is public.
-- 🏆 **Steady streaks level it up** — it hatches, grows, and evolves stages.
+- **Every commit feeds it** — work keeps it full and the streak alive.
+- **Silence makes it hungry, then sad, then sick** — a rotting streak is public.
+- **Steady streaks level it up** — it hatches, grows, and evolves stages.
 
 **The stack that keeps it alive:** GitHub Actions · Node.js · Markdown · raw SVG
 

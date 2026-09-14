@@ -9,23 +9,23 @@
  * @module readme
  */
 
-/** Mood -> emoji. The egg state hatches to 🐣. */
-const MOOD_EMOJI = {
-  happy: '🙂',
-  hungry: '😋',
-  sad: '😢',
-  sick: '🤒',
-  sleepy: '😴',
-  excited: '🤩',
-  egg: '🐣',
+/** Mood -> plain-text label. The egg stage reads "egg". */
+const MOOD_LABEL = {
+  happy: 'happy',
+  hungry: 'hungry',
+  sad: 'sad',
+  sick: 'sick',
+  sleepy: 'sleepy',
+  excited: 'excited',
+  egg: 'egg',
 };
 
-/** Growth stage -> emoji. */
-const STAGE_EMOJI = {
-  egg: '🥚',
-  baby: '🐣',
-  teen: '🐥',
-  adult: '🐓',
+/** Growth stage -> plain-text label. */
+const STAGE_LABEL = {
+  egg: 'egg',
+  baby: 'baby',
+  teen: 'teen',
+  adult: 'adult',
 };
 
 /**
@@ -38,12 +38,12 @@ const STAGE_EMOJI = {
 const clamp = (n, min = 0, max = 100) => Math.min(max, Math.max(min, n));
 
 /**
- * Render an emoji progress bar, e.g. `🍖 ████████░░ 80%`.
- * @param {string} icon Emoji shown before the bar
+ * Render a progress bar, e.g. `HUNGER ████████░░ 80%`.
+ * @param {string} icon Label shown before the bar
  * @param {number} value Current value
  * @param {number} max Full scale (default 100)
  * @param {number} width Bar width in blocks (default 10)
- * @returns {string} Emoji bar line
+ * @returns {string} Bar line
  */
 function bar(icon, value, max = 100, width = 10) {
   const pct = clamp(Math.round((value / Math.max(1, max)) * 100));
@@ -52,21 +52,21 @@ function bar(icon, value, max = 100, width = 10) {
 }
 
 /**
- * Resolve a mood emoji, falling back to happy.
+ * Resolve a mood label, falling back to "happy".
  * @param {string|undefined} mood Pet mood key
- * @returns {string} Emoji
+ * @returns {string} Label
  */
-function moodEmoji(mood) {
-  return MOOD_EMOJI[mood] ?? MOOD_EMOJI.happy;
+function moodLabel(mood) {
+  return MOOD_LABEL[mood] ?? MOOD_LABEL.happy;
 }
 
 /**
- * Resolve a stage emoji, defaulting to newly-hatched 🐣.
+ * Resolve a stage label, defaulting to "baby".
  * @param {string|undefined} stage Growth stage key
- * @returns {string} Emoji
+ * @returns {string} Label
  */
-function stageEmoji(stage) {
-  return STAGE_EMOJI[stage] ?? '🐣';
+function stageLabel(stage) {
+  return STAGE_LABEL[stage] ?? 'baby';
 }
 
 /**
@@ -93,21 +93,22 @@ function petSvgUrl(username) {
 export function buildHeader({ username, petName, svg, state }) {
   const mood = state.mood ?? 'happy';
   const stage = state.stage ?? 'baby';
-  const emoji = moodEmoji(mood);
-  const stageEmo = stageEmoji(stage);
+  const moodName = moodLabel(mood);
+  const stageName = stageLabel(stage);
   const stats = [
-    `🔥 **${state.streak ?? 0} day streak**`,
-    `📝 \`${state.totalCommits ?? 0}\` commits all-time`,
-    `${stageEmo} ${stage}`,
-  ].join(' • ');
+    `[streak] ${state.streak ?? 0} day streak`,
+    `[commits] \`${state.totalCommits ?? 0}\` all-time`,
+    `[stage] ${stageName}`,
+  ].join(' · ');
   const bars = [
-    `${bar('🍖', state.hunger ?? 0)} hunger`,
-    `${bar('⚡', state.health ?? 0)} health`,
-    `${bar('💖', state.happiness ?? 0)} happiness`,
+    `${bar('HUNGER', state.hunger ?? 0)}`,
+    `${bar('HEALTH', state.health ?? 0)}`,
+    `${bar('HAPPY', state.happiness ?? 0)}`,
   ].join(' · ');
   const title = `${petName} — a readme-pet`;
+  const moodLine = stage === 'egg' ? `> ${petName} — level ${state.level ?? 1} · ${stageName}` : `> ${petName} — level ${state.level ?? 1} · ${moodName} · ${stageName}`;
   return [
-    `> ${emoji} **${petName}** — level ${state.level ?? 1} · ${mood} ${emoji} · ${stageEmo} ${stage}`,
+    moodLine,
     '',
     stats,
     '',
@@ -125,17 +126,17 @@ export function buildHeader({ username, petName, svg, state }) {
 export function buildProfile({ username, petName, svg, state }) {
   const header = buildHeader({ username, petName, svg, state });
   return [
-    `### Hi there 👋 I'm ${username}`,
+    `### Hi there I'm ${username}`,
     '',
     header,
     '',
-    '## 🔥 Commit Arbiter',
+    '## Commit Arbiter',
     '',
     `Meet **${petName}**, the commit arbiter living in this README. It feeds on pushes, and it does not forgive silence.`,
     '',
-    '- ✅ **Every commit feeds it** — work keeps it full and the streak alive.',
-    '- ⚠️ **Silence makes it hungry, then sad, then sick** — a rotting streak is public.',
-    '- 🏆 **Steady streaks level it up** — it hatches, grows, and evolves stages.',
+    '- **Every commit feeds it** — work keeps it full and the streak alive.',
+    '- **Silence makes it hungry, then sad, then sick** — a rotting streak is public.',
+    '- **Steady streaks level it up** — it hatches, grows, and evolves stages.',
     '',
     '**The stack that keeps it alive:** GitHub Actions · Node.js · Markdown · raw SVG',
     '',
@@ -155,16 +156,16 @@ export function buildProfile({ username, petName, svg, state }) {
 export function buildFull({ username, petName }) {
   return `# readme-pet
 
-> 🐣 A living, commit-powered pet that lives in your GitHub **profile README**. It feeds on pushes, gets hungry during quiet weeks, and levels up on streaks.
+> A living, commit-powered pet that lives in your GitHub **profile README**. It feeds on pushes, gets hungry during quiet weeks, and levels up on streaks.
 
-## ✨ Features
+## Features
 
-- 🍖 **Emoji status bars** — hunger, energy and happiness at a glance
-- 🔥 **Stats line** — streak, all-time commits and growth stage
-- 🤖 **Commit Arbiter** — a pet that visibly reacts to how you commit
-- 🎨 **Raw SVG artwork** — one file, \`assets/pet.svg\`, no builds
+- **Emoji-free status bars** — hunger, health and happiness at a glance
+- **Stats line** — streak, all-time commits and growth stage
+- **Commit Arbiter** — a pet that visibly reacts to how you commit
+- **Raw SVG artwork** — one file, \`assets/pet.svg\`, no builds
 
-## 📦 Install
+## Install
 
 \`\`\`
 npm install readme-pet
@@ -172,7 +173,7 @@ npm install readme-pet
 
 Pure ESM · Node.js 18+ · zero dependencies.
 
-## 🚀 Usage
+## Usage
 
 \`\`\`js
 import { generateReadme } from 'readme-pet';
@@ -200,21 +201,21 @@ const { full, profile, header } = await generateReadme({
 - \`profile\` — a ready-to-paste \`${username}/${username}/README.md\`
 - \`header\` — just the pet + stats + status bars section
 
-## 🛠 Deploying to your profile
+## Deploying to your profile
 
 1. Push \`assets/pet.svg\` to \`${username}/readme-pet\` on \`main\`.
 2. Paste \`profile\` into \`${username}/${username}/README.md\`.
 3. Keep committing — the pet eats.
 
-## 📈 How the pet works
+## How the pet works
 
 | Commits | Effect on pet |
 | --- | --- |
 | Daily push | Fed, happy, streak grows |
-| Quiet week | Hungry → sad → sick |
+| Quiet week | Hungry -> sad -> sick |
 | Long streak | Levels up, evolves stage |
 
-## 📄 LICENSE
+## License
 
 MIT © ${username}
 `;
@@ -246,23 +247,25 @@ export async function generateReadme({ username, petName, svg, state }) {
  */
 export function renderProfileSnippet({ username, petName, svg, state }) {
   const mood = state.mood ?? 'happy';
-  const emoji = moodEmoji(mood);
-  const stage = state.stage ?? 'baby';
-  const stageEmo = stageEmoji(stage);
+  const stageName = stageLabel(state.stage ?? 'baby');
+  const moodName = moodLabel(mood);
+  const moodLine = state.stage === 'egg'
+    ? `> ${petName} — level ${state.level ?? 1} · ${stageName}`
+    : `> ${petName} — level ${state.level ?? 1} · ${moodName} · ${stageName}`;
   return [
-    `<!-- readme-pet: ${petName} (Lv.${state.level ?? 1} ${stage}) — auto-updated by GitHub Actions -->`,
+    `<!-- readme-pet: ${petName} (Lv.${state.level ?? 1} ${stageName}) — auto-updated by GitHub Actions -->`,
     '',
-    `> ${emoji} **${petName}** — level ${state.level ?? 1} · ${mood} · ${stageEmo} ${stage}`,
+    moodLine,
     '',
     `![${petName} — a readme-pet](${petSvgUrl(username)})`,
     '',
-    `> 🔥 **${state.streak ?? 0} day streak** · 📝 \`${state.totalCommits ?? 0}\` commits all-time`,
+    `> [streak] ${state.streak ?? 0} day streak · [commits] \`${state.totalCommits ?? 0}\` all-time`,
     '',
     `> ${[
-      `${bar('🍖', state.hunger ?? 0)} hunger`,
-      `${bar('⚡', state.health ?? 0)} health`,
-      `${bar('💖', state.happiness ?? 0)} happiness`,
+      `${bar('HUNGER', state.hunger ?? 0)}`,
+      `${bar('HEALTH', state.health ?? 0)}`,
+      `${bar('HAPPY', state.happiness ?? 0)}`,
     ].join(' · ')}`,
-    `> *This pet feeds on commits — silence makes it sick.* → [readme-pet](https://github.com/${username}/readme-pet)`,
+    `> *This pet feeds on commits — silence makes it sick.* - [readme-pet](https://github.com/${username}/readme-pet)`,
   ].join('\n');
 }
