@@ -6,10 +6,10 @@
   "stage": "egg",
   "hunger": 100,
   "happiness": 0,
-  "health": 40,
+  "health": 35,
   "streak": 0,
   "totalCommits": 0,
-  "lastUpdate": "2026-09-15T10:53:15.452Z",
+  "lastUpdate": "2026-09-15T16:05:13.322Z",
   "lastFed": "2026-09-13T00:00:00Z",
   "birthDate": "2026-09-13T00:00:00Z",
   "evolutionHistory": [
