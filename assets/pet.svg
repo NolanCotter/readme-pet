@@ -39,6 +39,6 @@
   <g>
     <text x="259" y="168" font-size="6.5" font-weight="700" letter-spacing="0.6" fill="#656D76" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">HEALTH</text>
     <rect x="259" y="172" width="86" height="8" rx="4" fill="#EAEFF2" stroke="#D0D7DE" stroke-width="1"/>
-    <rect x="260" y="173" width="4" height="6" rx="3" fill="#58A6FF"/>
+    <rect x="260" y="173" width="0" height="6" rx="3" fill="#58A6FF"/>
   </g>
 </svg>
